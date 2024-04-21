@@ -1,0 +1,44 @@
+pipeline AirportPipeline {
+    AirportExtractor -> AirportTextFileInterpreter;
+    AirportTextFileInterpreter
+        -> AirportCSVInterpreter 
+        -> NameHeaderWriter
+        -> AirportTableInterpreter
+        -> AirportLoader;
+    block AirportExtractor oftype HttpExtractor {
+
+        // 8. Properties are assigned to concrete values.
+        // Here, we specify the URL where the file shall be downloaded from.
+        url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B";
+    }
+    block AirportTextFileInterpreter oftype TextFileInterpreter { }
+    block AirportCSVInterpreter oftype CSVInterpreter {
+        enclosing: '"';
+    }
+    block NameHeaderWriter oftype CellWriter {
+        at: cell A1;
+        write: ["name"];
+    }
+    block AirportTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Lfd. Nummer" oftype integer,
+            "Name des Flughafens" oftype text,
+            "Ort" oftype text,
+            "Land" oftype text,
+            "IATA" oftype text,
+            "ICAO" oftype text,
+            "Latitude" oftype decimal,
+            "Longitude" oftype decimal,
+            "Altitude" oftype decimal,
+            "Zeitzone" oftype text,
+            "DST" oftype text,
+            "Zeitzonen-Datenbank" oftype text,
+            "geo_punkt" oftype decimal
+        ];
+    }
+    block AirportLoader oftype SQLiteLoader {
+        table: "Airports";
+        file: "./airports.sqlite";
+    }
+}
