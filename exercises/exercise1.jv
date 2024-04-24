@@ -2,7 +2,7 @@ pipeline AirportPipeline {
     AirportExtractor -> AirportTextFileInterpreter;
     AirportTextFileInterpreter
         -> AirportCSVInterpreter 
-        -> NameHeaderWriter
+      
         -> AirportTableInterpreter
         -> AirportLoader;
     block AirportExtractor oftype HttpExtractor {
@@ -12,10 +12,7 @@ pipeline AirportPipeline {
     block AirportCSVInterpreter oftype CSVInterpreter {
         enclosing: '"';
     }
-    block NameHeaderWriter oftype CellWriter {
-        at: cell A1;
-        write: ["name"];
-    }
+   
     block AirportTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
