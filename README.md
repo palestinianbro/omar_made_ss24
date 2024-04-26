@@ -1,6 +1,6 @@
 # Exercise Badges
 
-![](https://byob.yarr.is/palestinianbro/made-template/score_ex1)
+![](https://byob.yarr.is/palestinianbro/omar_made_ss24/score_ex1)
 ![](https://byob.yarr.is/palestinianbro/omar_made_ss24/score_ex2)
 ![](https://byob.yarr.is/palestinianbro/omar_made_ss24/score_ex3)
 ![](https://byob.yarr.is/palestinianbro/omar_made_ss24/score_ex4)
