@@ -1,4 +1,4 @@
-pipeline AirportPipeline {
+pipeline AirportsPipeline {
     AirportsExtractor -> AirportsTextFileInterpreter;
     AirportsTextFileInterpreter
         -> AirportsCSVInterpreter 
